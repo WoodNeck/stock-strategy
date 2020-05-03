@@ -4,7 +4,14 @@ const Money = require('./Money');
 const Stock = require('./Stock');
 const StockParsing = require('./StockAverage');
 
-const file = fs.readFileSync('./s10.csv');
+const filename = process.argv[2];
+
+if (!filename) {
+    console.log("Please provide file name");
+    return;
+}
+
+const file = fs.readFileSync(filename);
 
 neatCsv(file).then(rawDatas => {
     rawDatas = rawDatas.sort((a, b) => new Date(a['﻿"Date"']) - new Date(b['﻿"Date"']));
